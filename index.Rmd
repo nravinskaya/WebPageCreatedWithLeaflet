@@ -1,0 +1,91 @@
+---
+title: "Web page created with Leaflet"
+author: "Natalia Ravinskaya"
+date: "July 23, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Welcome to Berlin
+
+Here is an interactive map of Berlin with filming locations of some of my favorite movie.  
+Zoom it!  
+Click on everything!
+
+```{r mymap, message=FALSE}
+
+library(leaflet)
+
+filmSites <-c(
+# Bridge of Spies
+    "<a href='https://en.wikipedia.org/wiki/Glienicke_Bridge'>Glienicke Bridge</a>",
+    "<a href='https://en.wikipedia.org/wiki/Berlin_Tempelhof_Airport'>Tempelhof Airport</a>",
+    "<a href='https://en.wikipedia.org/wiki/Babelsberg_Studio'>Babelsberg Studio</a>",
+# Run Lola Run
+    "<a href='https://en.wikipedia.org/wiki/Oberbaum_Bridge'>Oberbaum Bridge</a>",
+    "<a href='https://en.wikipedia.org/wiki/Rathaus_Schoneberg'>Rathaus Schöneberg</a>",
+    "<a href='https://en.wikipedia.org/wiki/Kronprinzenpalais'>Kronprinzenpalais</a>",
+# Good Bye, Lenin
+    "(the former) Coca-Cola headquarters in Lichterfelde",
+    "<a href='https://fez-berlin.de/en/'>Leisure and recreation center in Wuhlheide</a>",
+    "(the former) Underground-Club Eimer",
+    "<a href='https://en.wikipedia.org/wiki/Berlin_Old_Nordbahnhof'>Nordbahnhof</a>",
+    "<a href='https://en.wikipedia.org/wiki/Karl-Marx-Allee'>Karl-Marx-Allee</a>",
+# Wings of Desire
+    "<a href='https://en.wikipedia.org/wiki/Berlin_Victory_Column'>Victory Column</a>",
+    "<a href='https://en.wikipedia.org/wiki/Potsdamer_Platz'>Potsdamer Platz</a>",
+    "<a href='https://staatsbibliothek-berlin.de/en/'>Berlin State Library</a>",
+    "<a href='https://en.wikipedia.org/wiki/Berlin_Anhalter_Bahnhof'>Anhalter Bahnhof</a>",
+    "Langenscheidtbrücke (Langenscheidt Bridge)",
+# The Lives of Others
+    "<a href='https://en.wikipedia.org/wiki/Berlin-Hohenschonhausen_Memorial'>Hohenschönhausen Memorial</a>",
+    "Wedekindstraße",
+    "Hufelandstraße 22",
+    "<a href='https://en.wikipedia.org/wiki/Volksbuhne'>Volksbühne</a>",
+    "<a href='https://en.wikipedia.org/wiki/Frankfurter_Tor'>Frankfurter Tor</a>",
+# Alles auf Zucker
+    "<a href='https://en.wikipedia.org/wiki/Berlin_Tegel_Airport'>Tegel Airport</a>",
+    "<a href='https://en.wikipedia.org/wiki/Alexanderplatz'>Alexanderplatz</a>",
+    "<a href='https://en.wikipedia.org/wiki/Weissensee_cemetery'>Weißensee Jewish Cemetery</a>",
+    "<a href='https://en.wikipedia.org/wiki/Oranienburger_Strasse'>Oranienburger Straße</a>")
+
+filmLatLong <-data.frame(
+    lat =c(52.41345, 52.4815,  52.38641,                       # Bridge of Spies
+           52.50177, 52.48493, 52.51707,                       # Run Lola Run
+           52.41921, 52.4613,  52.52865, 52.53226, 52.51996,   # Good Bye, Lenin
+           52.51451, 52.5098,  52.50732, 52.50356, 52.48857,   # Wings of Desire
+           52.54179, 52.51246, 52.53146, 52.52698, 52.51578,   # The Lives of Others
+           52.5583,  52.52128, 52.5422,  52.5247),             # Alles auf Zucker
+    #
+    lng =c(13.09024, 13.3905,  13.11997,                       # Bridge of Spies
+           13.44568, 13.34415, 13.39679,                       # Run Lola Run
+           13.31828, 13.54909, 13.40226, 13.38783, 13.42313,   # Good Bye, Lenin
+           13.35011, 13.37561, 13.37087, 13.38150, 13.36345,   # Wings of Desire
+           13.50113, 13.44493, 13.43245, 13.41190, 13.45401,   # The Lives of Others
+           13.2858,  13.41035, 13.4635,  13.3940),             # Alles auf Zucker
+    col =as.factor(c("brown","brown","brown",
+           "magenta","magenta","magenta",
+           "red","red","red","red","red",
+           "darkgreen","darkgreen","darkgreen","darkgreen","darkgreen",
+           "blue","blue","blue","blue","blue",
+           "black","black","black","black")))
+
+filmLatLong %>%
+    leaflet() %>%
+    addTiles() %>%
+    addCircleMarkers(popup = filmSites, color = filmLatLong$col) %>%
+    addLegend(position = "topleft",
+              title = "Movie titles",
+              labels = c("<a href='https://en.wikipedia.org/wiki/Bridge_of_Spies_(film)'>Bridge of Spies</a>",
+                         "<a href='https://en.wikipedia.org/wiki/Run_Lola_Run'>Run Lola Run</a>",
+                         "<a href='https://en.wikipedia.org/wiki/Good_Bye,_Lenin!'>Good Bye, Lenin!</a>",
+                         "<a href='https://en.wikipedia.org/wiki/Wings_of_Desire'>Wings of Desire</a>",
+                         "<a href='https://en.wikipedia.org/wiki/The_Lives_of_Others'>The Lives of Others</a>",
+                         "<a href='https://en.wikipedia.org/wiki/Alles_auf_Zucker!'>Alles auf Zucker!</a>"),
+              colors = c("brown", "magenta", "red", "darkgreen", "blue", "black"))
+
+```
+
