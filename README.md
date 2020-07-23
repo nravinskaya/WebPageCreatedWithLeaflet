@@ -1,2 +1,2 @@
-# WebPageCreatedWithLeaflet
-Developing Data Products: Week 2 Assignment
+
+http://nravinskaya.github.io/WebPageCreatedWithLeaflet/index.html
