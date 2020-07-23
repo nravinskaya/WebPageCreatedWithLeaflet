@@ -1,5 +1,4 @@
 This is an assignment for Week 2 of the "Developing Data Products" course on Coursera.
-
 The assignment is as follows:
 - Create a web page using R Markdown that features a map created with Leaflet.
 - Host your webpage on either GitHub Pages, RPubs, or NeoCities.
